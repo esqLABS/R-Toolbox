@@ -1,3 +1,28 @@
+#' Creates physiology parameters of an mean individual with given characteristics.
+#'
+#' @param species (String) Human, Beagle, Dog, Minipig, Monkey, Mouse, Rat
+#' @param population Either a string or an integer: European_ICRP_2002 = 0, WhiteAmerican_NHANES_1997 = 1, BlackAmerican_NHANES_1997 = 2
+#' MexicanAmericanWhite_NHANES_1997 = 3, Asian_Tanaka_1996 = 4, Preterm = 5, Japanese_Population = 6. European_ICRP_2002 by default.
+#' Only valid in combination with the species "Human"
+#' @param gender Either a string or an integer: MALE = 1, FEMALE = 2
+#' Only valid in combination with the species "Human"
+#' @param age Age of the individual in years
+#' @param weight Weight of the individual in kg
+#' @param height Height of the individual in dm
+#' @param BMI Body mass index of the individual in kg/dm^2. If weight and height are provided, a BMI value is calculated from those values and compared with the provided here. If the difference is bigger
+#' than 0.005, an error is thrown.
+#' @param DCI_Info If an initialized simulation is provided, surface area calculation method and ontogeny information will be extracted from the simulation.
+#' If empty, default surface area calculation is applied and no ontogenies are generated
+#' @param useDistribution FALSE by default
+#' @param gestational_age Gestational age at birth in weeks. 40 by default
+#' Only valid for the Preterm population
+#'
+#' @return A list containing generated parameters.
+#' If 'useDistribution' is set to FALSE, the list contains the columns ParameterPath with the full path of the parameter, and ParameterValue with the values of the parameters
+
+#' @export
+#'
+#' @examples
 PKSimCreateIndividual = function(species = "", population = "", gender = 3, age, weight = NA, height = NA, BMI = NA,
                                  DCI_Info = {}, useDistribution = FALSE, gestational_age = 40){
   require(rDotNet);
