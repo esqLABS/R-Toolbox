@@ -42,23 +42,6 @@ test.whichInitParam_none <- function() {
 #   checkEqualsNumeric(length(dci_info$InputTab$VariableParameters$Path), length(dci_info$InputTab$AllParameters$Path[which(dci_info$InputTab$AllParameters$ParameterType != "Formula")]))
 # }
 
-# test.whichInitParam_allnonFormula <- function() {
-#   dci_info <- initSimulation(XML = simModelXML, whichInitParam="allnonFormula")
-#   checkEqualsNumeric(length(dci_info$InputTab$VariableParameters$Path), length(dci_info$InputTab$AllParameters$Path[which(dci_info$InputTab$AllParameters$ParameterType != "Formula")]))
-# }
-
-# test.Version_4_0 <- function() {
-#   checkException(initSimulation(XML = simModelXML, whichInitParam="none", Version="4_0"))
-# }
-# 
-# test.Version_4_1 <- function() {
-#   checkException(initSimulation(XML = simModelXML, whichInitParam="none", Version="4_1"))
-# }
-# 
-# test.Version_5_0 <- function() {
-#   checkException(initSimulation(XML = simModelXML, whichInitParam="none", Version="5_0"))
-# }
-
 test.Version_6_0 <- function() {
   dci_info <- initSimulation(XML = simModelXML, whichInitParam="none", Version="6_0")
   checkEqualsNumeric(length(dci_info$InputTab$VariableParameters$Path), 0)
@@ -80,7 +63,7 @@ test.CheckDCIInfoStructure <- function() {
   checkTrue(file.exists(dci_info$MOBI_SETTINGS$SimModelComp))
   checkTrue(file.exists(dci_info$MOBI_SETTINGS$RInterface))
   checkEquals(names(dci_info$InputTab), c("AllParameters","VariableParameters","AllSpecies","VariableSpecies", "AllObservers","TimeSchema","SpeciesTimeSchema", "AllTableParameters", "VariableTableParameters"))
-  checkEquals(names(dci_info$InputTab$AllParameters),c("ID","Path","Value","Unit","ParameterType","Formula","Description"))
+  checkEquals(names(dci_info$InputTab$AllParameters),c("ID","Path","Value","Unit","ParameterType","Formula","Description", "UsedInSimulation"))
   checkEquals(names(attributes(dci_info$InputTab$AllParameters$ID)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
   checkEquals(names(attributes(dci_info$InputTab$AllParameters$Path)), c("Name","Description"))
   checkEquals(names(attributes(dci_info$InputTab$AllParameters$Value)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
@@ -88,7 +71,7 @@ test.CheckDCIInfoStructure <- function() {
   checkEquals(names(attributes(dci_info$InputTab$AllParameters$ParameterType)), c("Name","Description"))
   checkEquals(names(attributes(dci_info$InputTab$AllParameters$Formula)), c("Name","Description"))
   checkEquals(names(attributes(dci_info$InputTab$AllParameters$Description)), c("Name","Description"))
-  checkEquals(names(dci_info$InputTab$VariableParameters),c("ID","Path","Value","Unit","ParameterType","Formula","Description"))
+  checkEquals(names(dci_info$InputTab$VariableParameters),c("ID","Path","Value","Unit","ParameterType","Formula","Description", "UsedInSimulation"))
   checkEquals(names(attributes(dci_info$InputTab$VariableParameters$ID)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
   checkEquals(names(attributes(dci_info$InputTab$VariableParameters$Path)), c("Name","Description"))
   checkEquals(names(attributes(dci_info$InputTab$VariableParameters$Value)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
@@ -144,7 +127,7 @@ test.CheckDCIInfoStructure <- function() {
   checkEquals(names(attributes(dci_info$InputTab$VariableTableParameters$RestartSolver)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
   
   checkEquals(names(dci_info$ReferenceTab), c("AllParameters","VariableParameters","AllSpecies","VariableSpecies", "AllObservers","TimeSchema","SpeciesTimeSchema", "AllTableParameters", "VariableTableParameters"))
-  checkEquals(names(dci_info$ReferenceTab$AllParameters),c("ID","Path","Value","Unit","ParameterType","Formula","Description"))
+  checkEquals(names(dci_info$ReferenceTab$AllParameters),c("ID","Path","Value","Unit","ParameterType","Formula","Description", "UsedInSimulation"))
   checkEquals(names(attributes(dci_info$ReferenceTab$AllParameters$ID)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
   checkEquals(names(attributes(dci_info$ReferenceTab$AllParameters$Path)), c("Name","Description"))
   checkEquals(names(attributes(dci_info$ReferenceTab$AllParameters$Value)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
@@ -152,7 +135,7 @@ test.CheckDCIInfoStructure <- function() {
   checkEquals(names(attributes(dci_info$ReferenceTab$AllParameters$ParameterType)), c("Name","Description"))
   checkEquals(names(attributes(dci_info$ReferenceTab$AllParameters$Formula)), c("Name","Description"))
   checkEquals(names(attributes(dci_info$ReferenceTab$AllParameters$Description)), c("Name","Description"))
-  checkEquals(names(dci_info$ReferenceTab$VariableParameters),c("ID","Path","Value","Unit","ParameterType","Formula","Description"))
+  checkEquals(names(dci_info$ReferenceTab$VariableParameters),c("ID","Path","Value","Unit","ParameterType","Formula","Description", "UsedInSimulation"))
   checkEquals(names(attributes(dci_info$ReferenceTab$VariableParameters$ID)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
   checkEquals(names(attributes(dci_info$ReferenceTab$VariableParameters$Path)), c("Name","Description"))
   checkEquals(names(attributes(dci_info$ReferenceTab$VariableParameters$Value)), c("MinValue","MaxValue","DefaultValue","Name","Description"))
